@@ -75,6 +75,67 @@ svc := provenance.New(st, provenance.WithSanitizer(RedactingSanitizer{}))
 - `store/sqlite.New(*sql.DB)` for SQLite
 - `store/postgres.New(*sql.DB)` for Postgres
 
+#### Schema setup
+
+##### Postgres (existing project DB)
+
+```
+# Run once in your existing database.
+psql "$PROVENANCE_PG_DSN" -f store/postgres/schema.sql
+```
+
+##### SQLite (existing project DB file)
+
+```
+# Run once against your SQLite file.
+sqlite3 provenance.db < store/sqlite/schema.sql
+```
+
+#### Using an existing database
+
+```go
+import (
+  "database/sql"
+  "log"
+  "os"
+
+  _ "github.com/lib/pq"
+
+  "github.com/ajazfarhad/provenance"
+  "github.com/ajazfarhad/provenance/store/postgres"
+)
+
+db, err := sql.Open("postgres", os.Getenv("PROVENANCE_PG_DSN"))
+if err != nil {
+  log.Fatal(err)
+}
+
+st := postgres.New(db)
+svc := provenance.New(st)
+```
+
+####SQLite
+
+```go
+import (
+  "database/sql"
+  "log"
+
+  _ "modernc.org/sqlite"
+
+  "github.com/ajazfarhad/provenance"
+  "github.com/ajazfarhad/provenance/store/sqlite"
+)
+
+db, err := sql.Open("sqlite", "file:provenance.db?_pragma=busy_timeout(5000)")
+if err != nil {
+  log.Fatal(err)
+}
+
+st := sqlite.New(db)
+svc := provenance.New(st)
+```
+
 #### Example output (from `cmd/example`)
 
 ```
