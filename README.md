@@ -1,8 +1,24 @@
-Provenance
+<div align="center">
+  <img src="docs/assets/banner.png"
+       alt="Provenance banner"
+       width="800" />
+</div>
 
+<br/>
+
+<h1 align="center">Provenance</h1>
+
+<p align="center">
 Audit trails for infrastructure changes with tamper-evident hashing.
+</p>
 
-API (facade)
+<p align="center">
+  <img src="https://img.shields.io/github/go-mod/go-version/ajazfarhad/provenance">
+  <img src="https://img.shields.io/github/license/ajazfarhad/provenance">
+  <img src="https://img.shields.io/github/actions/workflow/status/ajazfarhad/provenance/ci.yml">
+</p>
+
+#### API (facade)
 
 Import the top-level package and use the built-in store adapters.
 
@@ -35,7 +51,7 @@ events, _ := svc.WhatChanged(ctx, provenance.Target{Type: "network_device", ID: 
 )
 ```
 
-Sanitizers
+#### Sanitizers
 
 ```go
 type RedactingSanitizer struct{}
@@ -53,13 +69,13 @@ func (RedactingSanitizer) SanitizeCommands(cmds []provenance.Command) []provenan
 svc := provenance.New(st, provenance.WithSanitizer(RedactingSanitizer{}))
 ```
 
-Stores
+#### Stores
 
 - `store/memory.New()` for tests or in-memory usage
 - `store/sqlite.New(*sql.DB)` for SQLite
 - `store/postgres.New(*sql.DB)` for Postgres
 
-Example output (from `cmd/example`)
+#### Example output (from `cmd/example`)
 
 ```
 Requested change...
