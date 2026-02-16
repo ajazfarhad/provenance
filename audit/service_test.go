@@ -24,7 +24,7 @@ func TestRequestCreatesTrailAndRequestedEvent(t *testing.T) {
 		Title:         "Update NTP",
 		Description:   "Set NTP servers",
 		CorrelationID: "req-123",
-		Requester:     audit.Actor{ID: "u-1", Name: "Ahmed", Role: audit.RoleRequester},
+		Requester:     audit.Actor{ID: "u-1", Name: "Zack", Role: audit.RoleRequester},
 		Targets:       []audit.Target{{Type: "network_device", ID: "sw-12"}},
 	})
 	if err != nil {
