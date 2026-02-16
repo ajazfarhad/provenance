@@ -13,8 +13,7 @@ Audit trails for infrastructure changes with tamper-evident hashing.
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/go-mod/go-version/ajazfarhad/provenance">
-  <img src="https://img.shields.io/github/license/ajazfarhad/provenance">
+  <img src="https://img.shields.io/badge/go-1.22+-00ADD8">
   <img src="https://img.shields.io/github/actions/workflow/status/ajazfarhad/provenance/ci.yml">
 </p>
 
